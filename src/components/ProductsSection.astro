@@ -1,0 +1,88 @@
+---
+import ProductCard from './ProductCard.astro';
+
+interface Props {
+	productImage: string;
+	amazonFreshUrl: string;
+	amazonEverwhiteUrl: string;
+	amazonDishUrl: string;
+}
+
+const { productImage, amazonFreshUrl, amazonEverwhiteUrl, amazonDishUrl } = Astro.props;
+---
+
+<section class="products container" id="productos">
+	<div class="content">
+	<div class="section-heading">
+		<h2>Nuestros productos</h2>
+	</div>
+	<div class="product-grid">
+		<ProductCard
+			name="DDC FRESH (blue)"
+			subtitle="Pasta concentrado"
+			description="Limpieza profunda que ayuda a mantener colores vibrantes y una frescura duradera."
+			features={[
+				"Limpieza profunda y efectiva",
+				"Fragancia fresca y duradera",
+				"Ideal para todo tipo de ropa",
+				"Alta concentración, rinde más",
+			]}
+			amazonUrl={amazonFreshUrl}
+			productImage={`${productImage}/cubo_azul.png`}
+			variant="fresh"
+			featured
+		/>
+		<ProductCard
+			name="DD EVERWHITE"
+			subtitle="Pasta concentrado"
+			description="Fórmula enfocada en blancos más luminosos y prendas con apariencia limpia."
+			features={[
+				"Blancos más luminosos",
+				"Remueve manchas difíciles",
+				"Fórmula concentrada",
+				"Protege las fibras y colores",
+			]}
+			amazonUrl={amazonEverwhiteUrl}
+			productImage={`${productImage}/cubo_blanco.png`}
+			variant="white"
+		/>
+		<ProductCard
+			name="DDC Dishwashing"
+			subtitle="Pasta concentrado"
+			description="Pasta concentrada para fregar con alto poder desengrasante y rendimiento superior."
+			features={[
+				"Desengrasa platos y utensilios",
+				"Fragancia fresca con toque limón",
+				"Rinde hasta 5 galones",
+				"Fácil de diluir y usar",
+			]}
+			amazonUrl={amazonDishUrl}
+			productImage={`${productImage}/cubo_verde.png`}
+			variant="dish"
+		/>
+	</div>
+	</div>
+</section>
+
+<style>
+	.content {
+		margin: 4rem auto 0 auto;
+	}
+	.product-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.5rem;
+	}
+
+	@media (max-width: 1180px) {
+		.product-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 820px) {
+		.product-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

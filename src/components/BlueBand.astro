@@ -1,0 +1,157 @@
+---
+const items = [
+	{
+		icon: '<path d="M12 2C8.5 6.9 6 10.2 6 14a6 6 0 0 0 12 0c0-3.8-2.5-7.1-6-12Z"/>',
+		title: "Fórmula concentrada",
+		text: "Más poder de limpieza en menos cantidad.",
+	},
+	{
+		icon: '<path d="M12 3l1.4 4.6L18 9l-4.6 1.4L12 15l-1.4-4.6L6 9l4.6-1.4L12 3Z"/><path d="M19 14l.7 2.3L22 17l-2.3.7L19 20l-.7-2.3L16 17l2.3-.7L19 14Z"/>',
+		title: "Blancos más luminosos",
+		text: "Realza el blanco y elimina las manchas.",
+	},
+	{
+		icon: '<circle cx="12" cy="12" r="2.4"/><path d="M12 3.5c2.2 0 3.2 2.7 1.6 4.1L12 9l-1.6-1.4c-1.6-1.4-.6-4.1 1.6-4.1Z"/><path d="M12 20.5c-2.2 0-3.2-2.7-1.6-4.1L12 15l1.6 1.4c1.6 1.4.6 4.1-1.6 4.1Z"/>',
+		title: "Frescura duradera",
+		text: "Aroma agradable que permanece por más tiempo.",
+	},
+	{
+		icon: '<path d="M12 3l7 3v5.2c0 4.4-2.8 8-7 9.8-4.2-1.8-7-5.4-7-9.8V6l7-3Z"/><path d="M9 12l2 2 4-4"/>',
+		title: "Protege las fibras",
+		text: "Cuida tu ropa y prolonga su vida útil.",
+	},
+	{
+		icon: '<path d="M6 4h10l2 3v13H6V4Z"/><path d="M10 9h3M10 13h5M10 17h4"/>',
+		title: "Rinde más",
+		text: "Alta concentración que rinde más lavadas.",
+	},
+	{
+		icon: '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+		title: "Ideal para el hogar",
+		text: "Perfecto para toda la familia.",
+	},
+];
+---
+
+<section class="blue-band" aria-label="Razones para elegir DDC">
+	{items.map(({ icon, title, text }) => (
+		<div class="band-item">
+			<svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+				<Fragment set:html={icon} />
+			</svg>
+			<div>
+				<h2>{title}</h2>
+				<p>{text}</p>
+			</div>
+		</div>
+	))}
+</section>
+
+<style>
+	.blue-band {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		gap: 1px;
+		max-width: var(--max-w, 1180px);
+		margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
+		overflow: hidden;
+		border-radius: 14px;
+		background: var(--line);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.band-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 0.5rem;
+		padding: 1.5rem 0.8rem;
+		background: var(--blue);
+		color: #fff;
+	}
+
+	.band-item svg {
+		width: 2.4rem;
+		height: 2.4rem;
+		stroke: #fff;
+		stroke-width: 1.8;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		fill: none;
+		color: #fff;
+		flex-shrink: 0;
+	}
+
+	h2 {
+		margin: 0 0 0.2rem;
+		color: #fff;
+		font-size: 0.82rem;
+		font-weight: 800;
+		line-height: 1.15;
+	}
+
+	p {
+		margin: 0;
+		color: rgba(255, 255, 255, 0.85);
+		font-size: 0.72rem;
+		line-height: 1.35;
+	}
+
+	@media (max-width: 1020px) {
+		.blue-band {
+			grid-template-columns: repeat(3, 1fr);
+			margin-inline: 1rem;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.blue-band {
+			grid-template-columns: repeat(2, 1fr);
+			border-radius: 10px;
+		}
+
+		.band-item {
+			padding: 1rem 0.6rem;
+			gap: 0.35rem;
+		}
+
+		.band-item svg {
+			width: 1.8rem;
+			height: 1.8rem;
+		}
+
+		h2 {
+			font-size: 0.74rem;
+		}
+
+		p {
+			font-size: 0.66rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.blue-band {
+			grid-template-columns: repeat(2, 1fr);
+			margin-inline: 0.75rem;
+		}
+
+		.band-item {
+			padding: 0.75rem 0.5rem;
+			gap: 0.25rem;
+		}
+
+		.band-item svg {
+			width: 1.5rem;
+			height: 1.5rem;
+		}
+
+		h2 {
+			font-size: 0.7rem;
+		}
+
+		p {
+			font-size: 0.62rem;
+		}
+	}
+</style>

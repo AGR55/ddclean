@@ -1,0 +1,113 @@
+---
+const testimonials = [
+	{
+		quote: "Desde que uso DDC FRESH mi ropa huele increíble y queda súper limpia. ¡Rinde muchísimo!",
+		name: "María G.",
+		role: "Cliente verificada",
+		initials: "MG",
+		color: "#1e88e5",
+	},
+	{
+		quote: "DD EVERWHITE dejó mis blancos como nuevos. Excelente limpieza y muy fácil de preparar.",
+		name: "Carlos R.",
+		role: "Cliente verificado",
+		initials: "CR",
+		color: "#0d1b2e",
+	},
+	{
+		quote: "El verde rinde muy bien para fregar y se diluye fácil. La cocina queda limpia sin usar de más.",
+		name: "Laura P.",
+		role: "Cliente verificada",
+		initials: "LP",
+		color: "#62c837",
+	},
+];
+---
+
+<section class="container content" id="testimonios">
+	<div class="section-heading">
+		<h2>Testimonios</h2>
+	</div>
+	<div class="testimonial-grid">
+		{testimonials.map((t) => (
+			<figure>
+				<div class="avatar" style={`background: ${t.color}`}>
+					{t.initials}
+				</div>
+				<div class="stars" aria-label="5 estrellas">★★★★★</div>
+				<blockquote>"{t.quote}"</blockquote>
+				<figcaption>
+					{t.name}
+					<span>{t.role}</span>
+				</figcaption>
+			</figure>
+		))}
+	</div>
+</section>
+
+<style>
+	.content {
+		margin-top: 4rem;
+	}
+
+	.testimonial-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	figure {
+		margin: 0;
+		padding: 1.5rem;
+		border: 1px solid var(--line);
+		border-radius: 8px;
+		background: #fff;
+		text-align: center;
+	}
+
+	.avatar {
+		width: 3.2rem;
+		height: 3.2rem;
+		margin: 0 auto 0.8rem;
+		border-radius: 50%;
+		display: grid;
+		place-items: center;
+		color: #fff;
+		font-weight: 800;
+		font-size: 1rem;
+	}
+
+	.stars {
+		color: #ffb400;
+		font-size: 1.1rem;
+		letter-spacing: 0.1em;
+	}
+
+	blockquote {
+		margin: 0.6rem 0 1rem;
+		color: var(--text);
+		font-size: 0.92rem;
+		line-height: 1.5;
+		font-style: italic;
+	}
+
+	figcaption {
+		font-weight: 900;
+		color: var(--navy);
+		font-size: 0.95rem;
+	}
+
+	figcaption span {
+		display: block;
+		margin-top: 0.15rem;
+		color: var(--muted);
+		font-size: 0.8rem;
+		font-weight: 600;
+	}
+
+	@media (max-width: 720px) {
+		.testimonial-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

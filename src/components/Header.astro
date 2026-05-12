@@ -1,0 +1,159 @@
+---
+import AmazonButton from './AmazonButton.astro';
+
+interface Props {
+	amazonUrl: string;
+}
+
+const { amazonUrl } = Astro.props;
+---
+
+<header class="site-header">
+	<div class="content">
+	<a class="brand" href="#inicio" aria-label="DDC Detergentes, inicio">
+		<div class="brand-text">
+			<span class="brand-name">DDC</span>
+			<span class="brand-sub">Detergentes</span>
+		</div>
+	</a>
+
+	<nav aria-label="Principal">
+		<a href="#inicio" class="active">Inicio</a>
+		<a href="#productos">Productos</a>
+		<a href="#beneficios">Beneficios</a>
+		<a href="#videos">Videos</a>
+		<a href="#testimonios">Testimonios</a>
+		<a href="#faq">Preguntas frecuentes</a>
+	</nav>
+
+	<AmazonButton href={amazonUrl} class="header-cta" />
+	</div>
+</header>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		
+		background: rgba(255, 255, 255, 0.92);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		border-bottom: 1px solid rgba(217, 229, 240, 0.7);
+	}
+
+	.content {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		align-items: center;
+		gap: 2rem;
+		width: min(100% - 2rem, 1280px);
+		max-width: 1280px;
+		margin: 0 auto;
+		padding: 0.75rem 0;
+	}
+
+	.brand {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		text-decoration: none;
+		color: var(--navy);
+	}
+
+	.brand-logo {
+		width: 2.6rem;
+		height: 2.6rem;
+		color: var(--navy);
+		stroke: none;
+	}
+
+	.brand-text {
+		display: flex;
+		flex-direction: column;
+		line-height: 1;
+	}
+
+	.brand-name {
+		font-size: 2rem;
+		font-weight: 900;
+		letter-spacing: -0.02em;
+		color: var(--navy);
+	}
+
+	.brand-sub {
+		font-size: 0.8rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: var(--muted);
+		margin-top: 0.1rem;
+	}
+
+	nav {
+		display: flex;
+		justify-content: center;
+		gap: clamp(0.8rem, 2.5vw, 2.4rem);
+		font-size: 0.88rem;
+		font-weight: 700;
+	}
+
+	nav a {
+		padding: 0.5rem 0;
+		color: var(--navy);
+		border-bottom: 2px solid transparent;
+		transition: color 200ms, border-color 200ms;
+	}
+
+	nav a:hover,
+	nav a.active {
+		color: var(--blue);
+		border-color: var(--blue);
+	}
+
+	@media (max-width: 1020px) {
+		.content {
+			grid-template-columns: auto auto;
+			gap: 1rem;
+		}
+
+		nav {
+			display: none;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.content {
+			padding: 0.6rem 0;
+			gap: 0.6rem;
+		}
+
+		/* Make CTA compact on mobile */
+		.content :global(.amazon-btn) {
+			padding: 0.55rem 0.9rem;
+			font-size: 0.78rem;
+			min-height: 2.4rem;
+			white-space: nowrap;
+		}
+
+		.content :global(.amazon-icon) {
+			width: 1.3rem;
+			height: 1.3rem;
+		}
+
+		.content :global(.amazon-icon img) {
+			width: 0.9rem;
+			height: 0.9rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.brand-name {
+			font-size: 1.6rem;
+		}
+
+		.brand-sub {
+			display: none;
+		}
+	}
+</style>

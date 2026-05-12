@@ -1,0 +1,465 @@
+---
+import AmazonButton from "./AmazonButton.astro";
+
+interface Props {
+    amazonUrl: string;
+    productImage: string;
+    mainImage: string;
+    mobileMainImage?: string;
+}
+
+const { amazonUrl, productImage, mainImage, mobileMainImage } = Astro.props;
+const mobileBg = mobileMainImage ?? mainImage;
+//const isMobile = window != undefined && window.innerWidth <= 720;
+---
+
+<section
+    class="hero hero-desktop"
+    id="inicio"
+    style={`--hero-bg: url('${mainImage}')`}
+>
+    <!-- Desktop overlay for legibility -->
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="content w-full">
+        <div class="hero-text w-full">
+            <h1>
+                Limpieza <span class="highlight">concentrada</span> que rinde más
+            </h1>
+            <p class="lead">
+                Pasta concentrada de alto rendimiento para ropa más limpia,
+                blanca y fresca en cada lavado.
+            </p>
+
+            <!-- CTA buttons row -->
+            <div class="hero-actions">
+                <AmazonButton href={amazonUrl} />
+                <a class="btn-secondary" href="#productos">
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                        <path d="M3 6h14M3 10h14M3 14h8"></path>
+                    </svg>
+                    Ver productos
+                </a>
+            </div>
+
+            <!-- Trust badges — always horizontal -->
+            <div class="trust-row" aria-label="Beneficios de compra">
+                <span class="benefits">
+                    <svg viewBox="0 0 20 20" aria-hidden="true"
+                        ><path
+                            d="M10 1a6 6 0 0 0-6 6.5c0 3.5 6 11 6 11s6-7.5 6-11A6 6 0 0 0 10 1Z"
+                        ></path><circle cx="10" cy="7.5" r="2"></circle></svg
+                    >
+                    Compra segura
+                </span>
+                <span class="benefits">
+                    <svg viewBox="0 0 20 20" aria-hidden="true"
+                        ><path d="M1 10h3l3-7 4 14 3-7h5"></path></svg
+                    >
+                    Envíos rápidos
+                </span>
+                <span class="benefits">
+                    <svg viewBox="0 0 20 20" aria-hidden="true"
+                        ><path
+                            d="M10 1l2.2 6.8H19l-5.5 4 2.1 6.7L10 14.4l-5.6 4.1 2.1-6.7L1 7.8h6.8z"
+                        ></path></svg
+                    >
+                    Calidad garantizada
+                </span>
+            </div>
+        </div>
+
+        <!-- Desktop: right column is the background image, empty here -->
+        <div class="hero-right" aria-hidden="true"></div>
+    </div>
+</section>
+
+<section
+    class="hero hero-mobile"
+    id="inicio"
+    style={`--hero-bg-mobile: url('${mobileBg}')`}
+>
+    <!-- Desktop overlay for legibility -->
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="content w-full">
+        <div class="hero-text w-full">
+            <div>
+                <h1>
+                    Limpieza <span class="highlight">concentrada</span> que rinde
+                    más
+                </h1>
+                <p class="lead">
+                    Pasta concentrada de alto rendimiento para ropa más limpia,
+                    blanca y fresca en cada lavado.
+                </p>
+
+                <!-- CTA buttons row -->
+                <div class="hero-actions">
+                    <AmazonButton href={amazonUrl} />
+                    <a class="btn-secondary w-full" href="#productos">
+                        <svg viewBox="0 0 20 20" aria-hidden="true">
+                            <path d="M3 6h14M3 10h14M3 14h8"></path>
+                        </svg>
+                        Ver productos
+                    </a>
+                </div>
+            </div>
+
+            <!-- Trust badges — always horizontal -->
+            <div class="trust-row" aria-label="Beneficios de compra">
+                <span class="benefits">
+                    <svg viewBox="0 0 20 20" aria-hidden="true"
+                        ><path
+                            d="M10 1a6 6 0 0 0-6 6.5c0 3.5 6 11 6 11s6-7.5 6-11A6 6 0 0 0 10 1Z"
+                        ></path><circle cx="10" cy="7.5" r="2"></circle></svg
+                    >
+                    Compra segura
+                </span>
+                <span class="benefits">
+                    <svg viewBox="0 0 20 20" aria-hidden="true"
+                        ><path d="M1 10h3l3-7 4 14 3-7h5"></path></svg
+                    >
+                    Envíos rápidos
+                </span>
+                <span class="benefits">
+                    <svg viewBox="0 0 20 20" aria-hidden="true"
+                        ><path
+                            d="M10 1l2.2 6.8H19l-5.5 4 2.1 6.7L10 14.4l-5.6 4.1 2.1-6.7L1 7.8h6.8z"
+                        ></path></svg
+                    >
+                    Calidad garantizada
+                </span>
+            </div>
+        </div>
+
+        <!-- Desktop: right column is the background image, empty here -->
+        <div class="hero-right" aria-hidden="true"></div>
+    </div>
+</section>
+
+<style>
+    /* ── Base ──────────────────────────────────── */
+    .hero {
+        position: relative;
+        overflow: hidden;
+        background-image: var(--hero-bg);
+        background-size: cover;
+        background-position: center right;
+        background-repeat: no-repeat;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .hero-mobile {
+        display: none;
+    }
+
+    .hero-desktop {
+        display: block;
+    }
+
+    /* Overlay: left side white→transparent so text is always legible on desktop */
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.97) 0%,
+            rgba(255, 255, 255, 0.9) 34%,
+            rgba(255, 255, 255, 0.34) 56%,
+            transparent 100%
+        );
+    }
+
+    /* ── Desktop 2-col layout ─────────────────── */
+    .content {
+        position: relative;
+        z-index: 10;
+        display: grid;
+        grid-template-columns: minmax(19rem, 0.72fr) 1.28fr;
+        align-items: stretch;
+        min-height: clamp(39rem, calc(100vh - 4rem), 48rem);
+        width: min(100% - 2rem, 1280px);
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+
+    .hero-right {
+        /* Intentionally empty — background image fills this column visually */
+    }
+
+    .hero-text {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 31rem;
+        padding: 5rem 0 3rem;
+    }
+
+    /* Mobile image: hidden on desktop */
+    .hero-mobile-img {
+        display: none;
+    }
+
+    span .benefits {
+        align-items: end;
+    }
+
+    /* ── Typography ───────────────────────────── */
+    h1 {
+        max-width: 10ch;
+        margin-bottom: 1rem;
+        color: var(--navy);
+        font-size: clamp(2.6rem, 5.4vw, 4.45rem);
+        line-height: 0.92;
+        font-weight: 650;
+    }
+
+    .highlight {
+        display: block;
+        color: var(--blue);
+    }
+
+    .lead {
+        max-width: 29rem;
+        color: var(--text);
+        font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+        line-height: 1.55;
+        margin-bottom: 0;
+    }
+
+    /* ── CTA buttons row ──────────────────────── */
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 1.65rem;
+    }
+
+    .hero-actions :global(.amazon-btn),
+    .btn-secondary {
+        flex: 1;
+    }
+
+    .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        min-height: 3rem;
+        padding: 0.8rem 1.6rem;
+        border-radius: 8px;
+        font-weight: 800;
+        font-size: 0.95rem;
+        color: var(--navy);
+        background: rgba(255, 255, 255, 0.85);
+        border: none;
+        box-shadow: inset 0 0 0 2px var(--line);
+        text-decoration: none;
+        transition:
+            background 180ms,
+            box-shadow 180ms,
+            transform 180ms;
+        white-space: nowrap;
+    }
+
+    .btn-secondary:hover {
+        background: #fff;
+        box-shadow: inset 0 0 0 2px var(--blue);
+        color: var(--blue);
+        transform: translateY(-1px);
+    }
+
+    .btn-secondary svg {
+        width: 1.55rem;
+        height: 1.55rem;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        fill: none;
+        color: inherit;
+        flex-shrink: 0;
+    }
+
+    /* ── Trust row — always horizontal, pinned to bottom ─── */
+    .trust-row {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 1.2rem;
+        margin-top: auto;
+        padding-top: 2rem;
+        padding-bottom: 1.5rem;
+        font-size: 0.8rem;
+        font-weight: 800;
+        color: var(--navy);
+    }
+
+    .trust-row span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        white-space: nowrap;
+    }
+
+    .trust-row svg {
+        width: 1rem;
+        height: 1rem;
+        stroke-width: 2;
+        stroke: var(--blue);
+        fill: none;
+        color: var(--blue);
+        flex-shrink: 0;
+    }
+
+    /* ── Tablet (≤1020px) ─────────────────────── */
+    @media (max-width: 1020px) {
+        .content {
+            grid-template-columns: 1fr;
+            min-height: clamp(35rem, calc(100vh - 4rem), 44rem);
+        }
+
+        .hero-right {
+            display: none;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.96) 0%,
+                rgba(255, 255, 255, 0.82) 48%,
+                rgba(255, 255, 255, 0.22) 100%
+            );
+        }
+
+        .hero-text {
+            max-width: 30rem;
+        }
+
+        h1 {
+            max-width: 14ch;
+        }
+    }
+
+    /* ── Mobile (≤720px) ─────────────────────── */
+    @media (max-width: 720px) {
+        .hero-desktop {
+            display: none;
+        }
+
+        .hero-mobile {
+            display: block;
+        }
+
+        /* Swap to mobile background via CSS custom property */
+        .hero {
+            background-image: var(--hero-bg-mobile);
+            background-position: center top;
+            background-size: cover;
+            min-height: 46rem;
+        }
+
+        .hero-overlay {
+            display: none;
+        }
+
+        .content {
+            position: relative;
+            width: 100%;
+            min-height: 46rem;
+            padding: clamp(1.05rem, 4vw, 1.7rem) 1rem 0.9rem;
+            grid-template-columns: 1fr;
+        }
+
+        .hero-text {
+            width: min(100%, 27rem);
+            max-width: 27rem;
+            padding: 0;
+            justify-content: flex-start;
+        }
+
+        h1 {
+            max-width: 11ch;
+            margin-bottom: 0.45rem;
+            font-size: clamp(1.78rem, 8.2vw, 2.35rem);
+            line-height: 0.94;
+        }
+
+        .lead {
+            max-width: 21rem;
+            font-size: clamp(0.75rem, 3.1vw, 0.86rem);
+            line-height: 1.32;
+        }
+
+        .hero-actions {
+            position: absolute;
+            right: 1rem;
+            bottom: 3.4rem;
+            left: 1rem;
+            z-index: 4;
+            justify-content: center;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: 0.45rem;
+            margin-top: 0;
+        }
+
+        /* Compact buttons on small screens */
+        .hero-actions :global(.amazon-btn),
+        .btn-secondary {
+            min-width: 0;
+            min-height: 2.45rem;
+            padding: 0.58rem 0.7rem;
+            font-size: 0.74rem;
+            width: min(100%, 13.4rem);
+        }
+
+        /* Trust row — keep horizontal, shrink font */
+        .trust-row {
+            display: none;
+        }
+
+        .trust-row svg {
+            width: 0.78rem;
+            height: 0.78rem;
+        }
+
+        /* Mobile product image — flows below text */
+        .hero-mobile-img {
+            display: block;
+            width: 100%;
+            max-height: 55vw;
+            object-fit: cover;
+            object-position: center top;
+        }
+    }
+
+    /* ── Very small (≤400px) ─────────────────── */
+    @media (max-width: 400px) {
+        h1 {
+            font-size: clamp(1.68rem, 7.8vw, 2rem);
+        }
+
+        .hero-actions {
+            gap: 0.45rem;
+        }
+
+        .hero-actions :global(.amazon-btn),
+        .btn-secondary {
+            padding-inline: 0.58rem;
+            font-size: 0.68rem;
+            width: min(100%, 12.8rem);
+        }
+
+        .trust-row {
+            gap: 0.35rem;
+            font-size: clamp(0.54rem, 2.45vw, 0.62rem);
+        }
+    }
+</style>

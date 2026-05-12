@@ -1,0 +1,58 @@
+---
+import VideoCard from './VideoCard.astro';
+
+interface Props {
+	productImage: string;
+}
+
+const { productImage } = Astro.props;
+
+const videos = [
+	{ title: "Testimonio de cliente", subtitle: "Resultados que sorprenden", duration: "1:02" },
+	{ title: "Testimonio de cliente", subtitle: "Ropa más blanca y suave", duration: "1:05" },
+	{ title: "Cómo preparar el detergente", subtitle: "Fácil, rápido y efectivo", duration: "1:28" },
+	{ title: "Paso a paso", subtitle: "Así se prepara tu pasta", duration: "1:15" },
+];
+---
+
+<section class="container content" id="videos">
+	<div class="section-heading">
+		<h2>Videos</h2>
+	</div>
+	<div class="video-grid">
+		{videos.map((v, i) => (
+			<VideoCard
+				title={v.title}
+				subtitle={v.subtitle}
+				duration={v.duration}
+				index={i}
+				productImage={`${productImage}/products.png`}
+			/>
+		))}
+	</div>
+</section>
+
+<style>
+	.content {
+		margin-top: 4rem;
+	}
+
+	.video-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	@media (max-width: 1020px) {
+		.video-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 600px) {
+		.video-grid {
+			grid-template-columns: 1fr;
+			gap: 0.75rem;
+		}
+	}
+</style>
