@@ -12,11 +12,10 @@ const { title, subtitle, src, poster } = Astro.props;
 <article class="video-card">
 	<div class="video-frame">
 		<video
-			src={src}
+			data-src={src}
 			poster={poster}
-			controls
 			playsinline
-			preload="metadata"
+			preload="none"
 			aria-label={`${title}: ${subtitle}`}
 		></video>
 		<div class="overlay"></div>
@@ -33,13 +32,16 @@ const { title, subtitle, src, poster } = Astro.props;
 		border-radius: 12px;
 		background: var(--navy);
 		box-shadow: var(--shadow-sm);
+		cursor: pointer;
 	}
 
 	.video-frame {
 		position: relative;
 		aspect-ratio: 9 / 16;
 		overflow: hidden;
-		background: var(--navy);
+		background:
+			linear-gradient(160deg, rgba(30, 136, 229, 0.18), rgba(13, 27, 46, 0.2)),
+			var(--navy);
 	}
 
 	.video-frame video {
@@ -101,6 +103,12 @@ const { title, subtitle, src, poster } = Astro.props;
 		font-size: clamp(0.72rem, 1vw, 0.82rem);
 		line-height: 1.3;
 		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+	}
+
+	.video-card.is-loaded .overlay,
+	.video-card.is-loaded .text-overlay {
+		opacity: 0;
+		transition: opacity 180ms ease;
 	}
 
 	@media (max-width: 480px) {

@@ -74,15 +74,107 @@ const videos = [
 <script>
 	const videoSection = document.querySelector('#videos');
 	const videos = Array.from(videoSection?.querySelectorAll('video') ?? []);
+	const mobileQuery = window.matchMedia('(max-width: 720px), (pointer: coarse)');
+
+	const loadVideo = (video) => {
+		if (video.dataset.loaded === 'true') return;
+
+		const src = video.dataset.src;
+
+		if (src) {
+			video.src = src;
+			video.load();
+		}
+
+		video.dataset.loaded = 'true';
+		video.closest('.video-card')?.classList.add('is-loaded');
+	};
+
+	const pauseOtherVideos = (currentVideo) => {
+		videos.forEach((video) => {
+			if (video !== currentVideo) {
+				video.pause();
+			}
+		});
+	};
+
+	const openFullscreen = async (video) => {
+		if (!mobileQuery.matches || document.fullscreenElement === video) return;
+
+		try {
+			if (video.requestFullscreen) {
+				await video.requestFullscreen();
+				return;
+			}
+
+			if (video.webkitEnterFullscreen) {
+				video.webkitEnterFullscreen();
+			}
+		} catch {
+			/* Some mobile browsers only allow fullscreen from native controls. */
+		}
+	};
 
 	videos.forEach((currentVideo) => {
+		currentVideo.controls = !mobileQuery.matches;
+
 		currentVideo.addEventListener('play', () => {
-			videos.forEach((video) => {
-				if (video !== currentVideo) {
-					video.pause();
-				}
-			});
+			pauseOtherVideos(currentVideo);
 		});
+
+		currentVideo.addEventListener('webkitendfullscreen', () => {
+			currentVideo.pause();
+		});
+
+		currentVideo.addEventListener('click', async (event) => {
+			event.preventDefault();
+
+			const isMobile = mobileQuery.matches;
+
+			loadVideo(currentVideo);
+			pauseOtherVideos(currentVideo);
+
+			if (isMobile) {
+				currentVideo.controls = false;
+				await openFullscreen(currentVideo);
+
+				if (currentVideo.paused) {
+					await currentVideo.play();
+				} else {
+					currentVideo.pause();
+				}
+
+				return;
+			}
+
+			currentVideo.controls = true;
+
+			if (currentVideo.paused) {
+				await currentVideo.play();
+			}
+		});
+	});
+
+	mobileQuery.addEventListener('change', () => {
+		videos.forEach((video) => {
+			video.controls = !mobileQuery.matches;
+		});
+	});
+
+	document.addEventListener('fullscreenchange', () => {
+		if (!document.fullscreenElement) {
+			videos.forEach((video) => {
+				video.pause();
+			});
+		}
+	});
+
+	document.addEventListener('visibilitychange', () => {
+		if (document.hidden) {
+			videos.forEach((video) => {
+				video.pause();
+			});
+		}
 	});
 </script>
 
