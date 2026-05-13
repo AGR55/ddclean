@@ -1,0 +1,30 @@
+---
+interface Props {
+    size?: number | string;
+    color?: string;
+    strokeWidth?: number | string;
+    title?: string;
+}
+
+const {
+    size = 20,
+    color = "currentColor",
+    strokeWidth = 1.9,
+    title,
+} = Astro.props;
+
+const iconSize = typeof size === "number" ? `${size}px` : size;
+---
+
+<svg
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    role={title ? "img" : undefined}
+    aria-hidden={title ? undefined : "true"}
+    aria-label={title}
+    style={`width: ${iconSize}; height: ${iconSize}; color: ${color}; display: block; fill: none; stroke: currentColor; stroke-width: ${strokeWidth}; stroke-linecap: round; stroke-linejoin: round;`}
+>
+    {title && <title>{title}</title>}
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+</svg>

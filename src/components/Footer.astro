@@ -1,250 +1,277 @@
 ---
-import AmazonButton from './AmazonButton.astro';
+import AmazonButton from "./AmazonButton.astro";
+import Facebook from "./icons/Facebook.astro";
+import Instagram from "./icons/Instagram.astro";
+import TikTok from "./icons/Tiktok.astro";
+import YouTube from "./icons/Youtube.astro";
 
 interface Props {
-	amazonUrl: string;
+    amazonUrl: string;
 }
 
 const { amazonUrl } = Astro.props;
 
 const amazon_products = [
-  {
-    name: "DD EverWhite",
-    link: "https://www.amazon.com/cubo_blanco"
-  },
-  {
-    name: "DDC Fresh (blue)",
-    link:"https://www.amazon.com/cubo_azul"
-  },
-  {
-    name: "DDC Dishwashing",
-    link:"https://www.amazon.com/cubo_verde"
-  }
-]
+    {
+        name: "DD EverWhite",
+        link: "https://amzn.to/3PkKrpe",
+    },
+    {
+        name: "DDC Fresh (blue)",
+        link: "https://amzn.to/4uk69ZR",
+    },
+    {
+        name: "DDC Dishwashing",
+        link: "https://amzn.to/3PHvT3f",
+    },
+];
+
+const socialIconProps = {
+    size: 21,
+    color: "#ffffff",
+    strokeWidth: 1.85,
+};
 ---
 
 <footer>
-	<div class="footer-inner">
-		<div class="footer-brand">
-			<div class="footer-logo">
-				<span class="brand-name">DDC</span>
-				<span class="brand-label">Detergentes</span>
-			</div>
-			<p>Productos de limpieza concentrada diseñados para brindarte resultados superiores en cada lavado.</p>
-		</div>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <div class="footer-logo">
+                <span class="brand-name">DDC</span>
+                <span class="brand-label">Detergentes</span>
+            </div>
+            <p>
+                Productos de limpieza concentrada diseñados para brindarte
+                resultados superiores en cada lavado.
+            </p>
+        </div>
 
-		<div class="footer-links">
-			<h2>Enlaces rápidos</h2>
-			<div class="links-cols">
-				<div>
-					<a href="#inicio">Inicio</a>
-					<a href="#productos">Productos</a>
-					<a href="#beneficios">Beneficios</a>
-				</div>
-				<div>
-					<a href="#videos">Videos</a>
-					<a href="#testimonios">Testimonios</a>
-					<a href="#faq">Preguntas frecuentes</a>
-				</div>
-			</div>
-		</div>
+        <div class="footer-links">
+            <h2>Enlaces rápidos</h2>
+            <div class="links-cols">
+                <div>
+                    <a href="#inicio">Inicio</a>
+                    <a href="#productos">Productos</a>
+                    <a href="#beneficios">Beneficios</a>
+                </div>
+                <div>
+                    <a href="#videos">Videos</a>
+                    <a href="#testimonios">Testimonios</a>
+                    <a href="#faq">Preguntas frecuentes</a>
+                </div>
+            </div>
+        </div>
 
-		<div>
+        <div>
             <h2>Productos</h2>
             <div class="link-products">
                 <ul>
-                    {amazon_products.map((product) => {
-                    return (
-                    <li>
-                        <a href={product.link} target="_blank" rel="noopener noreferrer">{product.name}</a>
-                    </li>
-                    )})}
+                    {
+                        amazon_products.map((product) => {
+                            return (
+                                <li>
+                                    <a
+                                        href={product.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {product.name}
+                                    </a>
+                                </li>
+                            );
+                        })
+                    }
                 </ul>
             </div>
-		</div>
+        </div>
 
-		<div class="footer-social">
-			<h2>Síguenos</h2>
-			<div class="social-icons">
-				<a href="#" aria-label="Facebook">
-					<svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-				</a>
-				<a href="#" aria-label="Instagram">
-					<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
-				</a>
-				<a href="#" aria-label="TikTok">
-					<svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-				</a>
-				<a href="#" aria-label="YouTube">
-					<svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98" fill="currentColor" stroke="none"/></svg>
-				</a>
-			</div>
-		</div>
-	</div>
+        <div class="footer-social">
+            <h2>Síguenos</h2>
+            <div class="social-icons">
+                <a
+                    href="https://www.facebook.com/share/18YAUxFjVW/?mibextid=wwXIfr"
+                    aria-label="Facebook"
+                >
+                    <Facebook {...socialIconProps} />
+                </a>
+                <a
+                    href="https://www.instagram.com/ddcle_an?igsh=bzE4OWhsc3RnaWpx&utm_source=qr"
+                    aria-label="Instagram"
+                >
+                    <Instagram {...socialIconProps} />
+                </a>
+                <a
+                    href="https://www.tiktok.com/@dainerdaniel1?_r=1&_t=ZP-96JNrbuKmI2"
+                    aria-label="TikTok"
+                >
+                    <TikTok {...socialIconProps} />
+                </a>
+                <a
+                    href="https://youtube.com/@danielreyes-rr8lg?si=YM5Vz0hZUmzF2jHq"
+                    aria-label="YouTube"
+                >
+                    <YouTube size={21} color="#ffffff" cutoutColor="#0d1b2e" />
+                </a>
+            </div>
+        </div>
+    </div>
 
-	<p class="copyright">© 2024 DDC Detergentes. Todos los derechos reservados.</p>
+    <p class="copyright">
+        © 2024 DDC Detergentes. Todos los derechos reservados.
+    </p>
 </footer>
 
 <style>
-	footer {
-		background: var(--navy);
-		color: #fff;
-	}
+    footer {
+        background: var(--navy);
+        color: #fff;
+    }
 
-	.footer-inner {
-		display: grid;
-		grid-template-columns: auto auto auto auto;
-		gap: 3rem;
-		padding: 2.5rem 0 1.5rem;
-		width: min(100% - 2rem, 1280px);
-		max-width: 1280px;
-		margin: 0 auto;
-	}
+    .footer-inner {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        gap: 3rem;
+        padding: 2.5rem 0 1.5rem;
+        width: min(100% - 2rem, 1280px);
+        max-width: 1280px;
+        margin: 0 auto;
+    }
 
-	.footer-brand {
-		display: flex;
-		flex-direction: column;
-		gap: 0.6rem;
-	}
+    .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
 
-	.footer-logo {
-		display: flex;
-		flex-direction: column;
-	}
+    .footer-logo {
+        display: flex;
+        flex-direction: column;
+    }
 
-	.brand-name {
-		font-size: 2.2rem;
-		font-weight: 900;
-		line-height: 0.9;
-	}
+    .brand-name {
+        font-size: 2.2rem;
+        font-weight: 900;
+        line-height: 0.9;
+    }
 
-	.brand-label {
-		font-size: 0.65rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		color: rgba(255, 255, 255, 0.7);
-	}
+    .brand-label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.7);
+    }
 
-	.footer-brand p {
-		max-width: 22rem;
-		color: rgba(255, 255, 255, 0.8);
-		font-size: 0.88rem;
-		line-height: 1.55;
-	}
+    .footer-brand p {
+        max-width: 22rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.88rem;
+        line-height: 1.55;
+    }
 
-	h2 {
-		margin-bottom: 0.8rem;
-		font-size: 0.88rem;
-		font-weight: 800;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-	}
+    h2 {
+        margin-bottom: 0.8rem;
+        font-size: 0.88rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
 
-	ul {
-	    list-style-type: none;
-		padding-inline-start: 0;
-		padding-top: 0.10rem;
-	}
+    ul {
+        list-style-type: none;
+        padding-inline-start: 0;
+        padding-top: 0.1rem;
+    }
 
-	li {
-	    text-decoration: none;
-		display: block;
-	    color: rgba(255, 255, 255, 0.8);
-		font-size: 0.88rem;
-		margin: 0.35rem 0;
-	    transition: color 200ms;
-	}
+    li {
+        text-decoration: none;
+        display: block;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.88rem;
+        margin: 0.35rem 0;
+        transition: color 200ms;
+    }
 
-	li:hover {
-	    color: #fff;
-	}
+    li:hover {
+        color: #fff;
+    }
 
-	.links-cols {
-		display: flex;
-		gap: 2rem;
-	}
+    .links-cols {
+        display: flex;
+        gap: 2rem;
+    }
 
-	.footer-links a {
-		display: block;
-		margin: 0.35rem 0;
-		color: rgba(255, 255, 255, 0.8);
-		font-size: 0.88rem;
-		transition: color 200ms;
-	}
+    .footer-links a {
+        display: block;
+        margin: 0.35rem 0;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.88rem;
+        transition: color 200ms;
+    }
 
-	.footer-links a:hover {
-		color: #fff;
-	}
+    .footer-links a:hover {
+        color: #fff;
+    }
 
-	.social-icons {
-		display: flex;
-		gap: 0.6rem;
-		margin-bottom: 1.2rem;
-	}
+    .social-icons {
+        display: flex;
+        gap: 0.6rem;
+        margin-bottom: 1.2rem;
+    }
 
-	.social-icons a {
-		display: grid;
-		place-items: center;
-		width: 2.4rem;
-		height: 2.4rem;
-		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.15);
-		color: #fff;
-		transition: background 200ms, transform 200ms;
-	}
+    .social-icons a {
+        display: grid;
+        place-items: center;
+        width: 2.4rem;
+        height: 2.4rem;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        transition:
+            background 200ms,
+            transform 200ms;
+    }
 
-	.social-icons a:hover {
-		background: rgba(255, 255, 255, 0.3);
-		transform: translateY(-2px);
-	}
+    .social-icons a:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+    }
 
-	.social-icons svg {
-		width: 1.2rem;
-		height: 1.2rem;
-		stroke: currentColor;
-		stroke-width: 1.8;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-		fill: none;
-		color: #fff;
-	}
+    .copyright {
+        margin: 0;
+        padding: 1rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.78rem;
+    }
 
-	.copyright {
-		margin: 0;
-		padding: 1rem 0;
-		border-top: 1px solid rgba(255, 255, 255, 0.18);
-		text-align: center;
-		color: rgba(255, 255, 255, 0.6);
-		font-size: 0.78rem;
-	}
+    @media (max-width: 1020px) {
+        .footer-inner {
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem 3rem;
+        }
+    }
 
-	@media (max-width: 1020px) {
-		.footer-inner {
-			grid-template-columns: 1fr 1fr;
-			gap: 2rem 3rem;
-		}
-	}
+    @media (max-width: 720px) {
+        .footer-inner {
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem 2rem;
+        }
+    }
 
-	@media (max-width: 720px) {
-		.footer-inner {
-			grid-template-columns: 1fr 1fr;
-			gap: 1.5rem 2rem;
-		}
-	}
+    @media (max-width: 480px) {
+        .footer-inner {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
 
-	@media (max-width: 480px) {
-		.footer-inner {
-			grid-template-columns: 1fr;
-			gap: 1.5rem;
-		}
+        .brand-name {
+            font-size: 1.8rem;
+        }
 
-		.brand-name {
-			font-size: 1.8rem;
-		}
-
-		.footer-brand p {
-			font-size: 0.82rem;
-		}
-	}
+        .footer-brand p {
+            font-size: 0.82rem;
+        }
+    }
 </style>
