@@ -1,101 +1,121 @@
 ---
 const faqs = [
-	["¿Cómo se prepara la pasta concentrada?", "Disuelve la cantidad recomendada de pasta en agua tibia antes de agregar la ropa. La pasta se diluye fácilmente para una distribución uniforme."],
-	["¿Para qué tipo de uso es recomendado cada producto?", "DDC Fresh está pensado para ropa de color y uso diario. DD Everwhite está orientado a prendas blancas. DDC Dishwashing es la variante verde para fregar platos y utensilios."],
-	["¿Cuánto rinde cada presentación?", "Depende de la cantidad usada por carga, pero al ser una fórmula concentrada se utiliza menos producto por lavado, rindiendo más que un detergente tradicional."],
-	["¿Puedo usarla en lavadora y lavado a mano?", "Sí. La pasta concentrada puede diluirse antes de usarla y aplicarse tanto en lavadora como en lavado a mano."],
-	["¿Tiene fragancia fuerte?", "Tiene una fragancia agradable y fresca que no es abrumadora, diseñada para permanecer en la ropa de forma sutil."],
-	["¿Es segura para ropa de color?", "DDC Fresh está formulado para cuidar colores y fibras. Para prendas delicadas, prueba primero en una zona poco visible."],
+    [
+        "¿Cómo se prepara la pasta concentrada?",
+        "Incorpora toda la pasta en 18 litros de agua, luego revuelve por cinco minutos y se convertirá en 20 litros de detergente",
+    ],
+    [
+        "¿Para qué tipo de uso es recomendado cada producto?",
+        "DDC Fresh está pensado para ropa de color y uso diario. DD Everwhite está orientado a prendas blancas. DDC Dishwashing es la variante verde para fregar platos y utensilios.",
+    ],
+    [
+        "¿Cuánto rinde cada presentación?",
+        "Rinde más de 300 lavadas, no hay que echar mucho en su laundry para conseguir un lavado eficiente",
+    ],
+    [
+        "¿Puedo usarla en lavadora y lavado a mano?",
+        "Sí. La pasta concentrada puede diluirse antes de usarla y aplicarse tanto en lavadora como en lavado a mano.",
+    ],
+    [
+        "¿Tiene fragancia fuerte?",
+        "Tiene una fragancia agradable y fresca que no es abrumadora, diseñada para permanecer en la ropa de forma sutil. La de color azul huele a lino y miquel dulce, te va a recordar a los hoteles de lujo; la de color blanco es neutra, diseñada para las personas que no toleran las fragancias y excelente para los pequeños de casa; la de color verde es de fregar y tiene un aroma fresco, similar al limón siciliano.",
+    ],
+    [
+        "¿Es segura para ropa de color?",
+        "DDC Fresh está formulado para cuidar colores y fibras. Puede lavar cualquier tipo de prenda sin miedo a que esta se manche ni deteriore. Es una excelente opción si desea cuidar su ropa.",
+    ],
 ];
 ---
 
-<section class="container  content faq" id="faq">
-	<div class="section-heading">
-		<h2>Preguntas frecuentes</h2>
-	</div>
-	<div class="faq-grid">
-		{faqs.map(([question, answer]) => (
-			<details>
-				<summary>{question}</summary>
-				<p>{answer}</p>
-			</details>
-		))}
-	</div>
+<section class="container content faq" id="faq">
+    <div class="section-heading">
+        <h2>Preguntas frecuentes</h2>
+    </div>
+    <div class="faq-grid">
+        {
+            faqs.map(([question, answer]) => (
+                <details>
+                    <summary>{question}</summary>
+                    <p>{answer}</p>
+                </details>
+            ))
+        }
+    </div>
 </section>
 
 <style>
-	.content {
-		margin-top: 4rem;
-	}
+    .content {
+        margin-top: 4rem;
+    }
 
-	.faq {
-		padding-bottom: clamp(2.5rem, 5vw, 4rem);
-	}
+    .faq {
+        padding-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
 
-	.faq-grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0.8rem;
-	}
+    .faq-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.8rem;
+    }
 
-	details {
-		border: 1px solid var(--line);
-		border-radius: 8px;
-		background: #fff;
-		box-shadow: none;
-		transition: box-shadow 250ms;
-	}
+    details {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: none;
+        transition: box-shadow 250ms;
+    }
 
-	details:hover {
-		box-shadow: var(--shadow-sm);
-	}
+    details:hover {
+        box-shadow: var(--shadow-sm);
+    }
 
-	details[open] {
-		border-color: rgba(30, 136, 229, 0.3);
-	}
+    details[open] {
+        border-color: rgba(30, 136, 229, 0.3);
+    }
 
-	summary {
-		cursor: pointer;
-		padding: 1rem 2.5rem 1rem 1.15rem;
-		color: var(--navy);
-		font-weight: 800;
-		font-size: 0.92rem;
-		list-style: none;
-		position: relative;
-	}
+    summary {
+        cursor: pointer;
+        padding: 1rem 2.5rem 1rem 1.15rem;
+        color: var(--navy);
+        font-weight: 800;
+        font-size: 0.92rem;
+        list-style: none;
+        position: relative;
+    }
 
-	summary::-webkit-details-marker {
-		display: none;
-	}
+    summary::-webkit-details-marker {
+        display: none;
+    }
 
-	summary::after {
-		content: "";
-		position: absolute;
-		right: 1rem;
-		top: 50%;
-		width: 0.5rem;
-		height: 0.5rem;
-		border-right: 2.5px solid var(--blue);
-		border-bottom: 2.5px solid var(--blue);
-		transform: translateY(-65%) rotate(45deg);
-		transition: transform 250ms;
-	}
+    summary::after {
+        content: "";
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-right: 2.5px solid var(--blue);
+        border-bottom: 2.5px solid var(--blue);
+        transform: translateY(-65%) rotate(45deg);
+        transition: transform 250ms;
+    }
 
-	details[open] summary::after {
-		transform: translateY(-35%) rotate(-135deg);
-	}
+    details[open] summary::after {
+        transform: translateY(-35%) rotate(-135deg);
+    }
 
-	p {
-		margin: 0;
-		padding: 0 1.15rem 1rem;
-		color: var(--muted);
-		font-size: 0.9rem;
-		line-height: 1.55;
-	}
+    p {
+        margin: 0;
+        padding: 0 1.15rem 1rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.55;
+    }
 
-	@media (max-width: 720px) {
-		.faq-grid {
-			grid-template-columns: 1fr;
-		}
-	}
+    @media (max-width: 720px) {
+        .faq-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
