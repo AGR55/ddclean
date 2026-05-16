@@ -1,208 +1,213 @@
 ---
-import { v2 as cloudinary } from 'cloudinary';
-import VideoCard from './VideoCard.astro';
+import { v2 as cloudinary } from "cloudinary";
+import VideoCard from "./VideoCard.astro";
 
 cloudinary.config({
-	cloud_name: 'dwxvcdann',
-	secure: true,
+    cloud_name: "dwxvcdann",
+    secure: true,
 });
 
 const videos = [
-	{
-		title: "Preparación DDC",
-		subtitle: "Mezcla inicial",
-		publicId: "preparacion_1_efzhd6",
-		version: 1778701014,
-	},
-	{
-		title: "Preparación DDC",
-		subtitle: "Paso a paso",
-		publicId: "preparacion_2_v7kpwf",
-		version: 1778701221,
-	},
-	{
-		title: "Reseña de cliente",
-		subtitle: "Resultado real",
-		publicId: "resena_1_k2qppi",
-		version: 1778701440,
-	},
-	{
-		title: "Reseña de cliente",
-		subtitle: "Experiencia DDC",
-		publicId: "resena_2_wkkvsz",
-		version: 1778701778,
-	},
+    {
+        title: "Preparación DDC",
+        subtitle: "Mezcla inicial",
+        publicId: "preparacion_1_efzhd6",
+        version: 1778701014,
+    },
+    {
+        title: "Preparación DDC",
+        subtitle: "Paso a paso",
+        publicId: "preparacion_2_v7kpwf",
+        version: 1778701221,
+    },
+    {
+        title: "Reseña de cliente",
+        subtitle: "Resultado real",
+        publicId: "resena_1_k2qppi",
+        version: 1778701440,
+    },
+    {
+        title: "Reseña de cliente",
+        subtitle: "Experiencia DDC",
+        publicId: "resena_2_wkkvsz",
+        version: 1778701778,
+    },
 ].map((video) => ({
-	...video,
-	src: cloudinary.url(video.publicId, {
-		resource_type: 'video',
-		type: 'upload',
-		version: video.version,
-		quality: 'auto',
-		fetch_format: 'auto',
-		transformation: [{ width: 900, crop: 'limit' }],
-	}),
-	poster: cloudinary.url(video.publicId, {
-		resource_type: 'video',
-		type: 'upload',
-		version: video.version,
-		format: 'jpg',
-		transformation: [
-			{ width: 720, height: 1280, crop: 'fill', gravity: 'auto' },
-			{ quality: 'auto' },
-		],
-	}),
+    ...video,
+    src: cloudinary.url(video.publicId, {
+        resource_type: "video",
+        type: "upload",
+        version: video.version,
+        quality: "auto",
+        fetch_format: "auto",
+        transformation: [{ width: 900, crop: "limit" }],
+    }),
+    poster: cloudinary.url(video.publicId, {
+        resource_type: "video",
+        type: "upload",
+        version: video.version,
+        format: "jpg",
+        transformation: [
+            { width: 720, height: 1280, crop: "fill", gravity: "auto" },
+            { quality: "auto" },
+        ],
+    }),
 }));
 ---
 
 <section class="container content" id="videos">
-	<div class="section-heading">
-		<h2>Videos</h2>
-	</div>
-	<div class="video-grid">
-		{videos.map((v, i) => (
-			<VideoCard
-				title={v.title}
-				subtitle={v.subtitle}
-				src={v.src}
-				poster={v.poster}
-			/>
-		))}
-	</div>
+    <div class="section-heading">
+        <h2>Videos</h2>
+    </div>
+    <div class="video-grid">
+        {
+            videos.map((v, i) => (
+                <VideoCard
+                    title={v.title}
+                    subtitle={v.subtitle}
+                    src={v.src}
+                    poster={v.poster}
+                />
+            ))
+        }
+    </div>
 </section>
 
 <script>
-	const videoSection = document.querySelector('#videos');
-	const videos = Array.from(videoSection?.querySelectorAll('video') ?? []);
-	const mobileQuery = window.matchMedia('(max-width: 720px), (pointer: coarse)');
+    const videoSection = document.querySelector("#videos");
+    const videos = Array.from(videoSection?.querySelectorAll("video") ?? []);
+    const mobileQuery = window.matchMedia(
+        "(max-width: 720px), (pointer: coarse)",
+    );
 
-	const loadVideo = (video) => {
-		if (video.dataset.loaded === 'true') return;
+    const loadVideo = (video) => {
+        if (video.dataset.loaded === "true") return;
 
-		const src = video.dataset.src;
+        const src = video.dataset.src;
 
-		if (src) {
-			video.src = src;
-			video.load();
-		}
+        if (src) {
+            video.src = src;
+            video.load();
+        }
 
-		video.dataset.loaded = 'true';
-		video.closest('.video-card')?.classList.add('is-loaded');
-	};
+        video.dataset.loaded = "true";
+        video.closest(".video-card")?.classList.add("is-loaded");
+    };
 
-	const pauseOtherVideos = (currentVideo) => {
-		videos.forEach((video) => {
-			if (video !== currentVideo) {
-				video.pause();
-			}
-		});
-	};
+    const pauseOtherVideos = (currentVideo) => {
+        videos.forEach((video) => {
+            if (video !== currentVideo) {
+                video.pause();
+            }
+        });
+    };
 
-	const openFullscreen = async (video) => {
-		if (!mobileQuery.matches || document.fullscreenElement === video) return;
+    const openFullscreen = async (video) => {
+        if (!mobileQuery.matches || document.fullscreenElement === video)
+            return;
 
-		try {
-			if (video.requestFullscreen) {
-				await video.requestFullscreen();
-				return;
-			}
+        try {
+            if (video.requestFullscreen) {
+                await video.requestFullscreen();
+                return;
+            }
 
-			if (video.webkitEnterFullscreen) {
-				video.webkitEnterFullscreen();
-			}
-		} catch {
-			/* Some mobile browsers only allow fullscreen from native controls. */
-		}
-	};
+            if (video.webkitEnterFullscreen) {
+                video.webkitEnterFullscreen();
+            }
+        } catch {
+            /* Some mobile browsers only allow fullscreen from native controls. */
+        }
+    };
 
-	videos.forEach((currentVideo) => {
-		currentVideo.controls = !mobileQuery.matches;
+    videos.forEach((currentVideo) => {
+        currentVideo.controls = !mobileQuery.matches;
 
-		currentVideo.addEventListener('play', () => {
-			pauseOtherVideos(currentVideo);
-		});
+        currentVideo.addEventListener("play", () => {
+            pauseOtherVideos(currentVideo);
+        });
 
-		currentVideo.addEventListener('webkitendfullscreen', () => {
-			currentVideo.pause();
-		});
+        currentVideo.addEventListener("webkitendfullscreen", () => {
+            currentVideo.pause();
+        });
 
-		currentVideo.addEventListener('click', async (event) => {
-			event.preventDefault();
+        currentVideo.addEventListener("click", async (event) => {
+            event.preventDefault();
 
-			const isMobile = mobileQuery.matches;
+            const isMobile = mobileQuery.matches;
 
-			loadVideo(currentVideo);
-			pauseOtherVideos(currentVideo);
+            loadVideo(currentVideo);
+            pauseOtherVideos(currentVideo);
 
-			if (isMobile) {
-				currentVideo.controls = false;
-				await openFullscreen(currentVideo);
+            if (isMobile) {
+                currentVideo.controls = false;
+                await openFullscreen(currentVideo);
 
-				if (currentVideo.paused) {
-					await currentVideo.play();
-				} else {
-					currentVideo.pause();
-				}
+                if (currentVideo.paused) {
+                    await currentVideo.play();
+                } else {
+                    currentVideo.pause();
+                }
 
-				return;
-			}
+                return;
+            }
 
-			currentVideo.controls = true;
+            currentVideo.controls = true;
 
-			if (currentVideo.paused) {
-				await currentVideo.play();
-			}
-		});
-	});
+            if (currentVideo.paused) {
+                await currentVideo.play();
+            }
+        });
+    });
 
-	mobileQuery.addEventListener('change', () => {
-		videos.forEach((video) => {
-			video.controls = !mobileQuery.matches;
-		});
-	});
+    mobileQuery.addEventListener("change", () => {
+        videos.forEach((video) => {
+            video.controls = !mobileQuery.matches;
+        });
+    });
 
-	document.addEventListener('fullscreenchange', () => {
-		if (!document.fullscreenElement) {
-			videos.forEach((video) => {
-				video.pause();
-			});
-		}
-	});
+    document.addEventListener("fullscreenchange", () => {
+        if (!document.fullscreenElement) {
+            videos.forEach((video) => {
+                video.pause();
+            });
+        }
+    });
 
-	document.addEventListener('visibilitychange', () => {
-		if (document.hidden) {
-			videos.forEach((video) => {
-				video.pause();
-			});
-		}
-	});
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            videos.forEach((video) => {
+                video.pause();
+            });
+        }
+    });
 </script>
 
 <style>
-	.content {
-		margin-top: 4rem;
-	}
+    .content {
+        margin-top: 1rem;
+    }
 
-	.video-grid {
-		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-		gap: clamp(0.85rem, 1.8vw, 1.25rem);
-		align-items: start;
-	}
+    .video-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: clamp(0.85rem, 1.8vw, 1.25rem);
+        align-items: start;
+    }
 
-	@media (max-width: 1080px) {
-		.video-grid {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-			max-width: 760px;
-			margin-inline: auto;
-		}
-	}
+    @media (max-width: 1080px) {
+        .video-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            max-width: 760px;
+            margin-inline: auto;
+        }
+    }
 
-	@media (max-width: 560px) {
-		.video-grid {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-			max-width: 420px;
-			gap: 0.75rem;
-		}
-	}
+    @media (max-width: 560px) {
+        .video-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            max-width: 420px;
+            gap: 0.75rem;
+        }
+    }
 </style>

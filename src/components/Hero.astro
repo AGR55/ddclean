@@ -381,7 +381,7 @@ const mobileBg = mobileMainImage ?? mainImage;
         .content {
             position: relative;
             width: 100%;
-            min-height: 50rem;
+            min-height: calc(100vh - 10rem);
             padding: clamp(1.05rem, 4vw, 1.7rem) 1rem 0.9rem;
             grid-template-columns: 1fr;
         }
@@ -415,7 +415,7 @@ const mobileBg = mobileMainImage ?? mainImage;
         .hero-actions {
             position: absolute;
             right: 0;
-            bottom: 0;
+            bottom: 1rem;
             left: 0;
             z-index: 4;
             justify-content: center;
