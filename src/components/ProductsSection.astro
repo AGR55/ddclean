@@ -12,8 +12,8 @@ const { productImage, amazonFreshUrl, amazonEverwhiteUrl, amazonDishUrl } =
     Astro.props;
 ---
 
-<section class="products container" id="productos">
-    <div class="content">
+<section class="products" id="productos">
+    <div class="content container">
         <div class="section-heading">
             <h2>Nuestros productos</h2>
         </div>
@@ -66,13 +66,70 @@ const { productImage, amazonFreshUrl, amazonEverwhiteUrl, amazonDishUrl } =
 </section>
 
 <style>
-    .content {
-        margin: 4rem auto 0 auto;
+    .products {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        margin-top: 2rem;
+        padding: clamp(3.25rem, 6vw, 5.5rem) 0;
+        background: transparent;
     }
+
+    .products::before,
+    .products::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        pointer-events: none;
+        border: 1px solid rgba(255, 255, 255, 0.62);
+        background: rgba(255, 255, 255, 0.22);
+        filter: blur(0.2px);
+        backdrop-filter: blur(18px);
+    }
+
+    .products::before {
+        width: clamp(14rem, 28vw, 24rem);
+        height: clamp(14rem, 28vw, 24rem);
+        top: 1rem;
+        left: max(-8rem, -7vw);
+        border-radius: 42% 58% 61% 39% / 48% 38% 62% 52%;
+        box-shadow: inset 24px 24px 48px rgba(255, 255, 255, 0.42);
+    }
+
+    .products::after {
+        width: clamp(12rem, 24vw, 20rem);
+        height: clamp(12rem, 24vw, 20rem);
+        right: max(-7rem, -6vw);
+        bottom: 2rem;
+        border-radius: 58% 42% 44% 56% / 42% 58% 42% 58%;
+        box-shadow: inset -20px 22px 46px rgba(255, 255, 255, 0.36);
+    }
+
+    .content {
+        position: relative;
+        margin: 0 auto;
+    }
+
+    .section-heading {
+        margin-bottom: clamp(2rem, 4vw, 3rem);
+    }
+
+    .section-heading h2 {
+        color: #164e63;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.78);
+    }
+
+    .section-heading h2::after {
+        width: 4.25rem;
+        height: 0.18rem;
+        background: linear-gradient(90deg, var(--cyan), var(--green));
+        box-shadow: 0 8px 22px rgba(34, 211, 238, 0.35);
+    }
+
     .product-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1.5rem;
+        gap: clamp(1rem, 2.2vw, 1.5rem);
         align-items: stretch;
     }
 

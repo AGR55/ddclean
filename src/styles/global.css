@@ -18,6 +18,11 @@
   --white: #ffffff;
   --charcoal: #333333;
   --green: #62c837;
+  --cyan: #0891b2;
+  --cyan-bright: #22d3ee;
+  --clean-mint: #ecfeff;
+  --glass-border: rgba(255, 255, 255, 0.58);
+  --glass-shadow: 0 22px 58px rgba(13, 27, 46, 0.13);
   --radius: 12px;
   --radius-sm: 8px;
   --shadow: 0 18px 42px rgba(13, 27, 46, 0.08);
@@ -39,6 +44,10 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 5.5rem;
 }
 
 body {

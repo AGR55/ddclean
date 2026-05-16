@@ -1,149 +1,164 @@
 ---
 const benefits = [
-	["gota", "Fórmula concentrada", "Más poder de limpieza en menos cantidad."],
-	["brillos", "Blancos más luminosos", "Realza el blanco y elimina las manchas."],
-	["flor", "Frescura duradera", "Aroma agradable que permanece por más tiempo."],
-	["escudo", "Protege las fibras", "Cuida tu ropa y prolonga su vida útil."],
-	["medida", "Rinde más", "Alta concentración que rinde más lavadas."],
-	["casa", "Ideal para el hogar", "Perfecto para toda la familia."],
+    ["gota", "Fórmula concentrada", "Más poder de limpieza en menos cantidad."],
+    [
+        "brillos",
+        "Blancos más luminosos",
+        "Realza el blanco y elimina las manchas.",
+    ],
+    [
+        "flor",
+        "Frescura duradera",
+        "Aroma agradable que permanece por más tiempo.",
+    ],
+    ["escudo", "Protege las fibras", "Cuida tu ropa y prolonga su vida útil."],
+    ["medida", "Rinde más", "Alta concentración que rinde más lavadas."],
+    ["casa", "Ideal para el hogar", "Perfecto para toda la familia."],
 ];
 
 const iconPaths: Record<string, string> = {
-	gota: '<path d="M12 2C8.5 6.9 6 10.2 6 14a6 6 0 0 0 12 0c0-3.8-2.5-7.1-6-12Z"/><path d="M9.4 15.5c.6 1.1 1.5 1.7 2.8 1.8"/>',
-	brillos: '<path d="M12 3l1.4 4.6L18 9l-4.6 1.4L12 15l-1.4-4.6L6 9l4.6-1.4L12 3Z"/><path d="M19 14l.7 2.3L22 17l-2.3.7L19 20l-.7-2.3L16 17l2.3-.7L19 14Z"/><path d="M5 15l.7 2.3L8 18l-2.3.7L5 21l-.7-2.3L2 18l2.3-.7L5 15Z"/>',
-	flor: '<circle cx="12" cy="12" r="2.4"/><path d="M12 3.5c2.2 0 3.2 2.7 1.6 4.1L12 9l-1.6-1.4c-1.6-1.4-.6-4.1 1.6-4.1Z"/><path d="M12 20.5c-2.2 0-3.2-2.7-1.6-4.1L12 15l1.6 1.4c1.6 1.4.6 4.1-1.6 4.1Z"/><path d="M3.5 12c0-2.2 2.7-3.2 4.1-1.6L9 12l-1.4 1.6c-1.4 1.6-4.1.6-4.1-1.6Z"/><path d="M20.5 12c0 2.2-2.7 3.2-4.1 1.6L15 12l1.4-1.6c1.4-1.6 4.1-.6 4.1 1.6Z"/>',
-	escudo: '<path d="M12 3l7 3v5.2c0 4.4-2.8 8-7 9.8-4.2-1.8-7-5.4-7-9.8V6l7-3Z"/><path d="M9 12l2 2 4-4"/>',
-	medida: '<path d="M6 4h10l2 3v13H6V4Z"/><path d="M16 4v5h4"/><path d="M10 9h3M10 13h5M10 17h4"/>',
-	casa: '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+    gota: '<path d="M12 2C8.5 6.9 6 10.2 6 14a6 6 0 0 0 12 0c0-3.8-2.5-7.1-6-12Z"/><path d="M9.4 15.5c.6 1.1 1.5 1.7 2.8 1.8"/>',
+    brillos:
+        '<path d="M12 3l1.4 4.6L18 9l-4.6 1.4L12 15l-1.4-4.6L6 9l4.6-1.4L12 3Z"/><path d="M19 14l.7 2.3L22 17l-2.3.7L19 20l-.7-2.3L16 17l2.3-.7L19 14Z"/><path d="M5 15l.7 2.3L8 18l-2.3.7L5 21l-.7-2.3L2 18l2.3-.7L5 15Z"/>',
+    flor: '<circle cx="12" cy="12" r="2.4"/><path d="M12 3.5c2.2 0 3.2 2.7 1.6 4.1L12 9l-1.6-1.4c-1.6-1.4-.6-4.1 1.6-4.1Z"/><path d="M12 20.5c-2.2 0-3.2-2.7-1.6-4.1L12 15l1.6 1.4c1.6 1.4.6 4.1-1.6 4.1Z"/><path d="M3.5 12c0-2.2 2.7-3.2 4.1-1.6L9 12l-1.4 1.6c-1.4 1.6-4.1.6-4.1-1.6Z"/><path d="M20.5 12c0 2.2-2.7 3.2-4.1 1.6L15 12l1.4-1.6c1.4-1.6 4.1-.6 4.1 1.6Z"/>',
+    escudo: '<path d="M12 3l7 3v5.2c0 4.4-2.8 8-7 9.8-4.2-1.8-7-5.4-7-9.8V6l7-3Z"/><path d="M9 12l2 2 4-4"/>',
+    medida: '<path d="M6 4h10l2 3v13H6V4Z"/><path d="M16 4v5h4"/><path d="M10 9h3M10 13h5M10 17h4"/>',
+    casa: '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
 };
 ---
 
-<section class="benefit-strip" id="beneficios" aria-label="Beneficios principales">
-	{benefits.map(([iconName, title, text]) => (
-		<article>
-			<svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
-				<Fragment set:html={iconPaths[iconName]} />
-			</svg>
-			<h2>{title}</h2>
-			<p>{text}</p>
-		</article>
-	))}
+<section
+    class="benefit-strip"
+    id="beneficios"
+    aria-label="Beneficios principales"
+>
+    {
+        benefits.map(([iconName, title, text]) => (
+            <article>
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                    <Fragment set:html={iconPaths[iconName]} />
+                </svg>
+                <h2>{title}</h2>
+                <p>{text}</p>
+            </article>
+        ))
+    }
 </section>
 
 <style>
-	.benefit-strip {
-		position: relative;
-		z-index: 5;
-		display: grid;
-		grid-template-columns: repeat(6, 1fr);
-		gap: 1px;
-		max-width: 1280px;
-		margin: -2rem auto;
-		overflow: hidden;
-		border: 1px solid var(--line);
-		border-radius: 14px;
-		background: var(--line);
-	}
+    .benefit-strip {
+        position: relative;
+        z-index: 5;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1px;
+        max-width: 1280px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--line);
+    }
 
-	article {
-		display: grid;
-		justify-items: center;
-		align-content: start;
-		gap: 0.15rem;
-		min-height: 9rem;
-		padding: 1.2rem 0.8rem;
-		text-align: center;
-		background: #ffffff;
-		transition: all;
-	}
+    article {
+        display: grid;
+        justify-items: center;
+        align-content: start;
+        gap: 0.15rem;
+        min-height: 9rem;
+        padding: 1.2rem 0.8rem;
+        text-align: center;
+        background: #ffffff;
+        transition: all;
+    }
 
-	article:hover {
-		background: linear-gradient(180deg, #ffffff, #e4f2ff);
-	}
+    article:hover {
+        background: linear-gradient(180deg, #ffffff, #e4f2ff);
+    }
 
-	article svg {
-		width: 2.6rem;
-		height: 2.6rem;
-		stroke: currentColor;
-		stroke-width: 1.8;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-		fill: none;
-		color: var(--blue);
-	}
+    article svg {
+        width: 2.6rem;
+        height: 2.6rem;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+        color: var(--blue);
+    }
 
-	h2 {
-		margin: 0.3rem 0 0.1rem;
-		color: var(--navy);
-		font-size: 0.88rem;
-		line-height: 1.15;
-		font-weight: 800;
-	}
+    h2 {
+        margin: 0.3rem 0 0.1rem;
+        color: var(--navy);
+        font-size: 0.88rem;
+        line-height: 1.15;
+        font-weight: 800;
+    }
 
-	p {
-		margin: 0;
-		color: var(--muted);
-		font-size: 0.76rem;
-		line-height: 1.35;
-	}
+    p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.76rem;
+        line-height: 1.35;
+    }
 
-	@media (max-width: 1020px) {
-		.benefit-strip {
-			grid-template-columns: repeat(3, 1fr);
-			margin: 1rem;
-		}
-	}
+    @media (max-width: 1020px) {
+        .benefit-strip {
+            grid-template-columns: repeat(3, 1fr);
+            margin: 1rem;
+        }
+    }
 
-	@media (max-width: 720px) {
-		.benefit-strip {
-			grid-template-columns: repeat(2, 1fr);
-			border-radius: 10px;
-		}
+    @media (max-width: 720px) {
+        .benefit-strip {
+            grid-template-columns: repeat(2, 1fr);
+            border-radius: 10px;
+        }
 
-		article {
-			min-height: 7rem;
-			padding: 0.9rem 0.6rem;
-		}
+        article {
+            min-height: 7rem;
+            padding: 0.9rem 0.6rem;
+        }
 
-		article svg {
-			width: 2rem;
-			height: 2rem;
-		}
+        article svg {
+            width: 2rem;
+            height: 2rem;
+        }
 
-		h2 {
-			font-size: 0.78rem;
-		}
+        h2 {
+            font-size: 0.78rem;
+        }
 
-		p {
-			font-size: 0.68rem;
-		}
-	}
+        p {
+            font-size: 0.68rem;
+        }
+    }
 
-	@media (max-width: 480px) {
-		.benefit-strip {
-			grid-template-columns: repeat(2, 1fr);
-			margin: 0.75rem;
-		}
+    @media (max-width: 480px) {
+        .benefit-strip {
+            grid-template-columns: repeat(2, 1fr);
+            margin: 0.75rem;
+        }
 
-		article {
-			min-height: auto;
-			padding: 0.7rem 0.5rem;
-			gap: 0.1rem;
-		}
+        article {
+            min-height: auto;
+            padding: 0.7rem 0.5rem;
+            gap: 0.1rem;
+        }
 
-		article svg {
-			width: 1.6rem;
-			height: 1.6rem;
-		}
+        article svg {
+            width: 1.6rem;
+            height: 1.6rem;
+        }
 
-		h2 {
-			font-size: 0.72rem;
-			margin: 0.15rem 0 0.05rem;
-		}
+        h2 {
+            font-size: 0.72rem;
+            margin: 0.15rem 0 0.05rem;
+        }
 
-		p {
-			font-size: 0.64rem;
-			line-height: 1.25;
-		}
-	}
+        p {
+            font-size: 0.64rem;
+            line-height: 1.25;
+        }
+    }
 </style>

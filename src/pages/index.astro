@@ -42,59 +42,146 @@ const mobileMainImage = "/landing-assets/mobile_main_banner.png";
                 mainImage={mainImage}
                 mobileMainImage={mobileMainImage}
             />
-            <BenefitStrip />
-            <ProductsSection
-                productImage={productSheet}
-                amazonFreshUrl={amazonFreshUrl}
-                amazonEverwhiteUrl={amazonEverwhiteUrl}
-                amazonDishUrl={amazonDishUrl}
-            />
-            <VideosSection />
-            <TestimonialsSection />
-            <FaqSection />
+            <div class="liquid-flow">
+                <BenefitStrip />
+                <ProductsSection
+                    productImage={productSheet}
+                    amazonFreshUrl={amazonFreshUrl}
+                    amazonEverwhiteUrl={amazonEverwhiteUrl}
+                    amazonDishUrl={amazonDishUrl}
+                />
+                <VideosSection />
+                <TestimonialsSection />
+                <FaqSection />
+            </div>
         </main>
 
         <Footer amazonUrl={amazonMainUrl} />
 
         <script>
-            import { gsap } from "gsap";
-            import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+            const navLinks = Array.from(
+                document.querySelectorAll<HTMLAnchorElement>(
+                    '.site-header nav a[href^="#"]',
+                ),
+            );
+            const sections = navLinks
+                .map((link) => {
+                    const id = link.hash.slice(1);
+                    const section = document.getElementById(id);
+                    return section ? { id, link, section } : null;
+                })
+                .filter((item): item is {
+                    id: string;
+                    link: HTMLAnchorElement;
+                    section: HTMLElement;
+                } => item !== null);
 
-            gsap.registerPlugin(ScrollToPlugin);
-
-            const reduceMotion = window.matchMedia(
-                "(prefers-reduced-motion: reduce)",
-            ).matches;
-
-            document
-                .querySelectorAll<HTMLAnchorElement>('a[href^="#"]')
-                .forEach((anchor) => {
-                    anchor.addEventListener("click", (event) => {
-                        const hash = anchor.getAttribute("href");
-                        if (!hash || hash === "#") return;
-
-                        const target = document.querySelector(hash);
-                        if (!target) return;
-
-                        event.preventDefault();
-
-                        if (reduceMotion) {
-                            target.scrollIntoView();
-                            history.pushState(null, "", hash);
-                            return;
-                        }
-
-                        gsap.to(window, {
-                            duration: 0.95,
-                            scrollTo: {
-                                y: target,
-                                offsetY: 88,
-                            },
-                            ease: "power3.inOut",
-                            onComplete: () => history.pushState(null, "", hash),
-                        });
-                    });
+            const setActiveSection = (activeId: string) => {
+                sections.forEach(({ id, link }) => {
+                    link.classList.toggle("active", id === activeId);
                 });
+            };
+
+            const getSectionTop = (section: HTMLElement) =>
+                section.getBoundingClientRect().top + window.scrollY;
+
+            const getOrderedSections = () =>
+                [...sections].sort(
+                    (a, b) => getSectionTop(a.section) - getSectionTop(b.section),
+                );
+
+            const updateActiveSection = () => {
+                const scrollY = window.scrollY;
+                const orderedSections = getOrderedSections();
+                const pageBottom =
+                    window.innerHeight + scrollY >=
+                    document.documentElement.scrollHeight - 24;
+
+                if (pageBottom) {
+                    const lastSection = orderedSections.at(-1);
+                    if (lastSection) setActiveSection(lastSection.id);
+                    return;
+                }
+
+                const marker = scrollY + window.innerHeight * 0.34;
+                const current =
+                    orderedSections.reduce((active, item) => {
+                        const top = getSectionTop(item.section);
+                        return top <= marker ? item : active;
+                    }, orderedSections[0]) ?? orderedSections[0];
+
+                if (current) setActiveSection(current.id);
+            };
+
+            navLinks.forEach((link) => {
+                link.addEventListener("click", () => {
+                    const id = link.hash.slice(1);
+                    if (id) setActiveSection(id);
+                });
+            });
+
+            updateActiveSection();
+            let ticking = false;
+            window.addEventListener(
+                "scroll",
+                () => {
+                    if (ticking) return;
+                    ticking = true;
+                    window.requestAnimationFrame(() => {
+                        updateActiveSection();
+                        ticking = false;
+                    });
+                },
+                { passive: true },
+            );
+            window.addEventListener("resize", updateActiveSection);
         </script>
     </body>
 </html>
+
+<style>
+    .liquid-flow {
+        position: relative;
+        z-index: 2;
+        isolation: isolate;
+        overflow: visible;
+        margin-top: -2rem;
+        padding-top: 2rem;
+        padding-bottom: clamp(1.5rem, 4vw, 3rem);
+        background:
+            radial-gradient(circle at 12% 8%, rgba(34, 211, 238, 0.32), transparent 30rem),
+            radial-gradient(circle at 92% 24%, rgba(98, 200, 55, 0.18), transparent 28rem),
+            radial-gradient(circle at 18% 64%, rgba(30, 136, 229, 0.16), transparent 30rem),
+            linear-gradient(180deg, #ffffff 0%, #ecfeff 11%, #f8fafc 47%, #eefcff 78%, #ecfeff 100%);
+    }
+
+    .liquid-flow::before,
+    .liquid-flow::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        pointer-events: none;
+        border: 1px solid rgba(255, 255, 255, 0.56);
+        background: rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+    }
+
+    .liquid-flow::before {
+        width: clamp(14rem, 26vw, 26rem);
+        height: clamp(14rem, 26vw, 26rem);
+        top: 8rem;
+        left: max(-9rem, -7vw);
+        border-radius: 42% 58% 61% 39% / 48% 38% 62% 52%;
+        box-shadow: inset 24px 24px 48px rgba(255, 255, 255, 0.4);
+    }
+
+    .liquid-flow::after {
+        width: clamp(15rem, 28vw, 28rem);
+        height: clamp(15rem, 28vw, 28rem);
+        right: max(-10rem, -7vw);
+        bottom: 8rem;
+        border-radius: 58% 42% 44% 56% / 42% 58% 42% 58%;
+        box-shadow: inset -22px 24px 50px rgba(255, 255, 255, 0.36);
+    }
+</style>

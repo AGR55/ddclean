@@ -13,9 +13,10 @@ const mobileBg = mobileMainImage ?? mainImage;
 //const isMobile = window != undefined && window.innerWidth <= 720;
 ---
 
+<div id="inicio" class="hero-anchor" aria-hidden="true"></div>
+
 <section
     class="hero hero-desktop"
-    id="inicio"
     style={`--hero-bg: url('${mainImage}')`}
 >
     <!-- Desktop overlay for legibility -->
@@ -76,7 +77,6 @@ const mobileBg = mobileMainImage ?? mainImage;
 
 <section
     class="hero hero-mobile"
-    id="inicio"
     style={`--hero-bg-mobile: url('${mobileBg}')`}
 >
     <!-- Desktop overlay for legibility -->
@@ -140,6 +140,10 @@ const mobileBg = mobileMainImage ?? mainImage;
 
 <style>
     /* ── Base ──────────────────────────────────── */
+    .hero-anchor {
+        scroll-margin-top: 5rem;
+    }
+
     .hero {
         position: relative;
         overflow: hidden;
