@@ -21,23 +21,26 @@ const mobileBg = mobileMainImage ?? mainImage;
 
     <div class="content w-full">
         <div class="hero-text w-full">
-            <h1>
-                Limpieza <span class="highlight">concentrada</span> que rinde más
-            </h1>
-            <p class="lead">
-                Pasta concentrada de alto rendimiento para ropa más limpia,
-                blanca y fresca en cada lavado.
-            </p>
+            <div class="hero-main">
+                <h1>
+                    Limpieza <span class="highlight">concentrada</span> que
+                    rinde más
+                </h1>
+                <p class="lead">
+                    Pasta concentrada de alto rendimiento para ropa más limpia,
+                    blanca y fresca en cada lavado.
+                </p>
 
-            <!-- CTA buttons row -->
-            <div class="hero-actions">
-                <AmazonButton href={amazonUrl} />
-                <a class="btn-secondary" href="#productos">
-                    <svg viewBox="0 0 20 20" aria-hidden="true">
-                        <path d="M3 6h14M3 10h14M3 14h8"></path>
-                    </svg>
-                    Ver productos
-                </a>
+                <!-- CTA buttons row -->
+                <div class="hero-actions">
+                    <AmazonButton href={amazonUrl} />
+                    <a class="btn-secondary" href="#productos">
+                        <svg viewBox="0 0 20 20" aria-hidden="true">
+                            <path d="M3 6h14M3 10h14M3 14h8"></path>
+                        </svg>
+                        Ver productos
+                    </a>
+                </div>
             </div>
 
             <!-- Trust badges — always horizontal -->
@@ -81,7 +84,7 @@ const mobileBg = mobileMainImage ?? mainImage;
 
     <div class="content w-full">
         <div class="hero-text w-full">
-            <div>
+            <div class="hero-main">
                 <h1>
                     Limpieza <span class="highlight">concentrada</span> que rinde
                     más
@@ -150,6 +153,7 @@ const mobileBg = mobileMainImage ?? mainImage;
         background-repeat: no-repeat;
         width: 100%;
         z-index: 1;
+        height: calc(100vh - 3rem);
     }
 
     .hero-mobile {
@@ -185,6 +189,7 @@ const mobileBg = mobileMainImage ?? mainImage;
         min-height: clamp(39rem, calc(100vh - 4rem), 48rem);
         width: min(100% - 2rem, 1280px);
         max-width: 1280px;
+        height: calc(100vh - 3rem);
         margin: 0 auto;
     }
 
@@ -195,11 +200,14 @@ const mobileBg = mobileMainImage ?? mainImage;
     .hero-text {
         position: relative;
         z-index: 3;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr) auto;
         max-width: 31rem;
         padding: 5rem 0 3rem;
+    }
+
+    .hero-main {
+        grid-row: 2;
     }
 
     /* Mobile image: hidden on desktop */
@@ -290,10 +298,11 @@ const mobileBg = mobileMainImage ?? mainImage;
 
     /* ── Trust row — always horizontal, pinned to bottom ─── */
     .trust-row {
+        grid-row: 4;
         display: flex;
         flex-wrap: nowrap;
         gap: 1.2rem;
-        margin-top: auto;
+        margin-top: 0;
         padding-top: 2rem;
         padding-bottom: 1.5rem;
         font-size: 0.8rem;
@@ -378,10 +387,16 @@ const mobileBg = mobileMainImage ?? mainImage;
         }
 
         .hero-text {
+            display: flex;
+            flex-direction: column;
             width: min(100%, 40rem);
             max-width: 40rem;
             padding: 1.5rem 0;
             justify-content: flex-start;
+        }
+
+        .hero-main {
+            grid-row: auto;
         }
 
         h1 {

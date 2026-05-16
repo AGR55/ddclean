@@ -144,4 +144,11 @@ const { productImage, amazonFreshUrl, amazonEverwhiteUrl, amazonDishUrl } =
             grid-template-columns: 1fr;
         }
     }
+
+    @media (max-width: 720px) {
+        .products::before,
+        .products::after {
+            display: none;
+        }
+    }
 </style>
