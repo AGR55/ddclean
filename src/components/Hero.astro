@@ -15,10 +15,7 @@ const mobileBg = mobileMainImage ?? mainImage;
 
 <div id="inicio" class="hero-anchor" aria-hidden="true"></div>
 
-<section
-    class="hero hero-desktop"
-    style={`--hero-bg: url('${mainImage}')`}
->
+<section class="hero hero-desktop" style={`--hero-bg: url('${mainImage}')`}>
     <!-- Desktop overlay for legibility -->
     <div class="hero-overlay" aria-hidden="true"></div>
 
@@ -365,7 +362,7 @@ const mobileBg = mobileMainImage ?? mainImage;
             background-image: var(--hero-bg-mobile);
             background-position: center top;
             background-size: cover;
-            min-height: 46rem;
+            min-height: calc(100vh - 2rem);
         }
 
         .hero-overlay {
@@ -375,7 +372,7 @@ const mobileBg = mobileMainImage ?? mainImage;
         .content {
             position: relative;
             width: 100%;
-            min-height: 46rem;
+            min-height: 50rem;
             padding: clamp(1.05rem, 4vw, 1.7rem) 1rem 0.9rem;
             grid-template-columns: 1fr;
         }
