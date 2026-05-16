@@ -55,5 +55,46 @@ const mobileMainImage = "/landing-assets/mobile_main_banner.png";
         </main>
 
         <Footer amazonUrl={amazonMainUrl} />
+
+        <script>
+            import { gsap } from "gsap";
+            import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+            gsap.registerPlugin(ScrollToPlugin);
+
+            const reduceMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)",
+            ).matches;
+
+            document
+                .querySelectorAll<HTMLAnchorElement>('a[href^="#"]')
+                .forEach((anchor) => {
+                    anchor.addEventListener("click", (event) => {
+                        const hash = anchor.getAttribute("href");
+                        if (!hash || hash === "#") return;
+
+                        const target = document.querySelector(hash);
+                        if (!target) return;
+
+                        event.preventDefault();
+
+                        if (reduceMotion) {
+                            target.scrollIntoView();
+                            history.pushState(null, "", hash);
+                            return;
+                        }
+
+                        gsap.to(window, {
+                            duration: 0.95,
+                            scrollTo: {
+                                y: target,
+                                offsetY: 88,
+                            },
+                            ease: "power3.inOut",
+                            onComplete: () => history.pushState(null, "", hash),
+                        });
+                    });
+                });
+        </script>
     </body>
 </html>
